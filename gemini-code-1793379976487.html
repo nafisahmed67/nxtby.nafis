@@ -1,0 +1,1967 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NXT by Nafis | MERN Stack Developer | NSDA Trainer & Assessor</title>
+  <meta name="description" content="Official Portfolio of Nafis Ahmed (NXT by Nafis) — Full-Stack MERN Developer, NSDA Certified Trainer & Assessor, and Course Coordinator at Ruhul IT, Sherpur, Bogura." />
+  <meta name="author" content="Nafis Ahmed" />
+
+  <!-- Custom Glowing 'N' SVG Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%236366F1'/%3E%3Cstop offset='100%25' stop-color='%2306B6D4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='16' fill='%230B0F19'/%3E%3Crect x='2' y='2' width='60' height='60' rx='14' fill='none' stroke='url(%23g)' stroke-width='3' opacity='0.85'/%3E%3Cpath d='M18 46V18h7.5l13 20V18H46v28h-7.5l-13-20v20H18z' fill='url(%23g)'/%3E%3C/svg%3E" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            darkBg: '#0B0F19',
+            darkCard: '#111827',
+            brandIndigo: '#6366F1',
+            brandCyan: '#06B6D4',
+          },
+          animation: {
+            'float-slow': 'float 5s ease-in-out infinite',
+            'float-delayed': 'float 6s ease-in-out 2.5s infinite',
+            'pulse-glow': 'pulseGlow 5s ease-in-out infinite',
+          },
+          keyframes: {
+            float: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-12px)' },
+            },
+            pulseGlow: {
+              '0%, 100%': { opacity: '0.35', transform: 'scale(1)' },
+              '50%': { opacity: '0.65', transform: 'scale(1.08)' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    /* Scrollbar Styling */
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: #0B0F19; }
+    ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #6366F1; }
+
+    /* Glassmorphism & Spotlight Hover Effect */
+    .glass-card {
+      position: relative;
+      background: rgba(17, 24, 39, 0.72);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s ease, box-shadow 0.35s ease;
+    }
+    html:not(.dark) .glass-card {
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(15, 23, 42, 0.08);
+      box-shadow: 0 12px 32px -12px rgba(15, 23, 42, 0.07);
+    }
+    .spotlight-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: radial-gradient(
+        500px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+        rgba(99, 102, 241, 0.14),
+        transparent 40%
+      );
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .spotlight-card:hover::before {
+      opacity: 1;
+    }
+    .spotlight-card > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Gradient Text */
+    .gradient-text {
+      background: linear-gradient(135deg, #6366F1 0%, #06B6D4 55%, #38BDF8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* Scroll Reveal Animations */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Typewriter Cursor */
+    .typewriter-cursor {
+      display: inline-block;
+      width: 3px;
+      background-color: #06B6D4;
+      margin-left: 4px;
+      animation: blink 1s step-end infinite;
+    }
+    @keyframes blink { 50% { opacity: 0; } }
+
+    /* Subtle Grid Pattern Overlay */
+    .bg-grid-pattern {
+      background-size: 40px 40px;
+      background-image: 
+        linear-gradient(to right, rgba(99, 102, 241, 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(99, 102, 241, 0.04) 1px, transparent 1px);
+    }
+  </style>
+</head>
+
+<body class="bg-slate-50 text-slate-900 dark:bg-darkBg dark:text-slate-100 font-sans antialiased selection:bg-brandIndigo selection:text-white transition-colors duration-300 overflow-x-hidden bg-grid-pattern">
+
+  <!-- Top Scroll Progress Bar -->
+  <div class="fixed top-0 left-0 right-0 h-1 z-50 bg-transparent">
+    <div id="scrollProgressBar" class="h-full w-0 bg-gradient-to-r from-brandIndigo via-brandCyan to-emerald-400 transition-all duration-75"></div>
+  </div>
+
+  <!-- Ambient Glowing Background Blobs -->
+  <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+    <div class="absolute -top-40 -left-40 w-[28rem] h-[28rem] bg-brandIndigo/20 dark:bg-brandIndigo/15 rounded-full blur-3xl animate-pulse-glow"></div>
+    <div class="absolute top-1/3 -right-40 w-[28rem] h-[28rem] bg-brandCyan/20 dark:bg-brandCyan/15 rounded-full blur-3xl animate-pulse-glow"></div>
+    <div class="absolute -bottom-40 left-1/3 w-[26rem] h-[26rem] bg-purple-500/15 dark:bg-purple-500/10 rounded-full blur-3xl"></div>
+  </div>
+
+  <!-- ================= STICKY NAVBAR (ZERO ADMIN BUTTONS) ================= -->
+  <header class="fixed top-0 left-0 right-0 z-40 transition-all duration-300 glass-card border-b border-slate-200/60 dark:border-slate-800/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      
+      <!-- Brand Logo: NXT by Nafis -->
+      <a href="#home" class="flex items-center gap-3 group">
+        <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-brandIndigo to-brandCyan p-[2px] shadow-lg shadow-brandIndigo/25 group-hover:scale-105 transition-transform">
+          <div class="w-full h-full bg-slate-950 rounded-[14px] flex items-center justify-center">
+            <span class="font-extrabold text-xl gradient-text tracking-tighter">N</span>
+          </div>
+        </div>
+        <div>
+          <div class="flex items-center gap-1.5">
+            <span class="font-extrabold text-xl tracking-tight">NXT</span>
+            <span class="text-xs font-mono px-2 py-0.5 rounded-md bg-brandIndigo/15 text-brandIndigo dark:text-brandCyan border border-brandIndigo/30 font-semibold">by Nafis</span>
+          </div>
+          <span class="block text-[10px] font-mono uppercase tracking-widest text-slate-500 dark:text-slate-400 mt-0.5">MERN Dev • NSDA Trainer & Assessor</span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation -->
+      <nav class="hidden md:flex items-center gap-7 text-sm font-medium text-slate-600 dark:text-slate-300">
+        <a href="#about" class="hover:text-brandIndigo dark:hover:text-brandCyan transition-colors">About</a>
+        <a href="#skills" class="hover:text-brandIndigo dark:hover:text-brandCyan transition-colors">Skills</a>
+        <a href="#experience" class="hover:text-brandIndigo dark:hover:text-brandCyan transition-colors">Experience</a>
+        <a href="#projects" class="hover:text-brandIndigo dark:hover:text-brandCyan transition-colors">Projects</a>
+        <a href="#services" class="hover:text-brandIndigo dark:hover:text-brandCyan transition-colors">Services</a>
+        <a href="#contact" class="hover:text-brandIndigo dark:hover:text-brandCyan transition-colors">Contact</a>
+      </nav>
+
+      <!-- Right Controls -->
+      <div class="flex items-center gap-3">
+        <!-- Theme Toggle Button -->
+        <button onclick="toggleTheme()" title="Toggle Dark/Light Theme" class="p-2.5 rounded-xl bg-slate-200/70 dark:bg-slate-800/80 text-slate-700 dark:text-slate-300 hover:text-brandIndigo dark:hover:text-brandCyan transition-all">
+          <i data-lucide="sun" class="w-5 h-5 hidden dark:block"></i>
+          <i data-lucide="moon" class="w-5 h-5 block dark:hidden"></i>
+        </button>
+
+        <!-- Hire Me CTA -->
+        <a href="#contact" class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-brandIndigo to-brandCyan text-white text-sm font-semibold shadow-lg shadow-brandIndigo/25 hover:opacity-95 hover:scale-[1.02] transition-all">
+          <span>Let's Talk</span>
+          <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+        </a>
+
+        <!-- Mobile Hamburger -->
+        <button onclick="toggleMobileMenu()" class="md:hidden p-2.5 rounded-xl bg-slate-200/70 dark:bg-slate-800/80">
+          <i data-lucide="menu" class="w-5 h-5"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Dropdown -->
+    <div id="mobileMenu" class="hidden md:hidden border-t border-slate-200 dark:border-slate-800 px-4 pt-3 pb-6 space-y-2 bg-white/95 dark:bg-slate-900/95 backdrop-blur-lg">
+      <a href="#about" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800">About</a>
+      <a href="#skills" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800">Skills</a>
+      <a href="#experience" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800">Experience & Education</a>
+      <a href="#projects" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800">Projects</a>
+      <a href="#services" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800">Services</a>
+      <a href="#contact" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800">Contact</a>
+    </div>
+  </header>
+
+  <!-- ================= MAIN CONTENT ================= -->
+  <main class="relative z-10 pt-28 pb-20">
+
+    <!-- 1. HERO SECTION -->
+    <section id="home" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-20">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        
+        <!-- Left Intro -->
+        <div class="lg:col-span-7 space-y-6 reveal active">
+          <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-brandIndigo/10 dark:bg-brandIndigo/15 border border-brandIndigo/30 text-brandIndigo dark:text-brandCyan text-xs font-mono font-medium">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+            <span id="heroBadgeText">MERN Stack Developer | NSDA Trainer & Assessor</span>
+          </div>
+
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.15]">
+            Building Next-Gen Web Ecosystems — <span id="heroName" class="gradient-text">Nafis Ahmed</span>
+          </h1>
+
+          <div class="h-10 sm:h-12 flex items-center text-xl sm:text-2xl lg:text-3xl font-bold text-slate-700 dark:text-slate-200 font-mono">
+            <span class="text-brandIndigo mr-2">&gt;</span>
+            <span id="typewriterText">MERN Stack Developer</span>
+            <span class="typewriter-cursor">&nbsp;</span>
+          </div>
+
+          <p id="heroBio" class="text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed max-w-2xl">
+            Full-Stack Web Developer specializing in the MERN Stack, Course Coordinator & Trainer at Ruhul Information Technology (Ruhul IT), and NSDA Certified Trainer & Assessor. Blending scalable engineering, graphic design, and digital marketing into high-impact web products.
+          </p>
+
+          <!-- Primary CTA Buttons -->
+          <div class="flex flex-wrap items-center gap-4 pt-2">
+            <a href="#projects" class="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-xl bg-gradient-to-r from-brandIndigo to-brandCyan text-white font-semibold shadow-lg shadow-brandIndigo/25 hover:scale-[1.03] transition-all">
+              <i data-lucide="layers" class="w-5 h-5"></i>
+              <span>Explore Projects</span>
+            </a>
+            <a id="heroCvBtn" href="#contact" class="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl glass-card hover:border-brandIndigo/50 font-semibold transition-all">
+              <i data-lucide="download" class="w-5 h-5 text-brandCyan"></i>
+              <span>Download CV</span>
+            </a>
+            <a id="heroWhatsappBtn" href="https://wa.me/8801739626449" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-5 py-3.5 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-500 dark:text-emerald-400 font-semibold hover:bg-emerald-500/20 transition-all">
+              <i data-lucide="message-circle" class="w-5 h-5"></i>
+              <span>WhatsApp</span>
+            </a>
+          </div>
+
+          <!-- Verified Social Links Bar -->
+          <div class="pt-4 flex flex-wrap items-center gap-3">
+            <span class="text-xs font-mono uppercase tracking-wider text-slate-400 mr-1">Follow NXT:</span>
+            <a id="socialGithub" href="https://github.com/nafisahmed67" target="_blank" rel="noopener noreferrer" class="p-2.5 rounded-xl glass-card hover:text-brandCyan hover:border-brandCyan/50 hover:-translate-y-1 transition-all" title="GitHub">
+              <i data-lucide="github" class="w-5 h-5"></i>
+            </a>
+            <a id="socialLinkedin" href="https://www.linkedin.com/in/nafis-ahmed-a708b2398" target="_blank" rel="noopener noreferrer" class="p-2.5 rounded-xl glass-card hover:text-brandCyan hover:border-brandCyan/50 hover:-translate-y-1 transition-all" title="LinkedIn">
+              <i data-lucide="linkedin" class="w-5 h-5"></i>
+            </a>
+            <a id="socialFacebook" href="https://www.facebook.com/nafis2325" target="_blank" rel="noopener noreferrer" class="p-2.5 rounded-xl glass-card hover:text-brandCyan hover:border-brandCyan/50 hover:-translate-y-1 transition-all" title="Facebook">
+              <i data-lucide="facebook" class="w-5 h-5"></i>
+            </a>
+            <a id="socialTwitter" href="https://x.com" target="_blank" rel="noopener noreferrer" class="p-2.5 rounded-xl glass-card hover:text-brandCyan hover:border-brandCyan/50 hover:-translate-y-1 transition-all" title="Twitter / X">
+              <i data-lucide="twitter" class="w-5 h-5"></i>
+            </a>
+            <a id="socialInstagram" href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="p-2.5 rounded-xl glass-card hover:text-brandCyan hover:border-brandCyan/50 hover:-translate-y-1 transition-all" title="Instagram">
+              <i data-lucide="instagram" class="w-5 h-5"></i>
+            </a>
+            <a id="socialEmail" href="mailto:mdnafisahmed67@gmail.com" class="p-2.5 rounded-xl glass-card hover:text-brandCyan hover:border-brandCyan/50 hover:-translate-y-1 transition-all" title="Email Nafis">
+              <i data-lucide="mail" class="w-5 h-5"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Right Framed Photo & 3D Floating Badges -->
+        <div class="lg:col-span-5 relative flex justify-center reveal active">
+          <div class="relative w-72 h-72 sm:w-88 sm:h-88 md:w-96 md:h-96">
+            <!-- Outer Glow Ring -->
+            <div class="absolute inset-0 rounded-3xl bg-gradient-to-tr from-brandIndigo via-brandCyan to-purple-500 rotate-6 opacity-35 blur-xl"></div>
+            <div class="absolute inset-0 rounded-3xl bg-gradient-to-tr from-brandIndigo to-brandCyan p-1 shadow-2xl">
+              <div class="w-full h-full rounded-[22px] bg-slate-900 overflow-hidden relative group">
+                <img id="heroProfileImg" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80" alt="Nafis Ahmed - NXT by Nafis" class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700" onerror="this.src='https://ui-avatars.com/api/?name=Nafis+Ahmed&size=512&background=111827&color=38BDF8&bold=true'" />
+                <div class="absolute inset-0 bg-gradient-to-t from-darkBg/90 via-darkBg/20 to-transparent"></div>
+                <div class="absolute bottom-4 left-4 right-4 flex items-center justify-between text-white">
+                  <div>
+                    <p class="text-xs font-mono text-brandCyan">NXT by Nafis</p>
+                    <p class="font-bold text-sm">Course Coordinator @ Ruhul IT</p>
+                  </div>
+                  <span class="px-2.5 py-1 rounded-lg bg-emerald-500/20 border border-emerald-400/30 text-emerald-300 text-[10px] font-mono">
+                    Verified
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Floating Badge 1: MERN Stack -->
+            <div class="absolute -top-5 -left-5 glass-card px-4 py-2.5 rounded-2xl shadow-xl flex items-center gap-2.5 animate-float-slow">
+              <div class="w-9 h-9 rounded-xl bg-brandCyan/20 flex items-center justify-center text-brandCyan">
+                <i data-lucide="code-2" class="w-5 h-5"></i>
+              </div>
+              <div>
+                <p class="text-xs font-bold">MERN Stack</p>
+                <p class="text-[10px] font-mono text-slate-400">Full-Stack Architect</p>
+              </div>
+            </div>
+
+            <!-- Floating Badge 2: NSDA Trainer & Assessor -->
+            <div class="absolute -bottom-5 -right-5 glass-card px-4 py-2.5 rounded-2xl shadow-xl flex items-center gap-2.5 animate-float-delayed">
+              <div class="w-9 h-9 rounded-xl bg-emerald-500/20 flex items-center justify-center text-emerald-400">
+                <i data-lucide="shield-check" class="w-5 h-5"></i>
+              </div>
+              <div>
+                <p class="text-xs font-bold">NSDA Trainer & Assessor</p>
+                <p class="text-[10px] font-mono text-slate-400">3x Level-3 Certified</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Animated Stats Bar -->
+      <div id="statsContainer" class="mt-16 grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 reveal">
+        <!-- Rendered dynamically -->
+      </div>
+    </section>
+
+    <!-- 2. ABOUT ME & DUAL EXPERTISE SECTION -->
+    <section id="about" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 reveal">
+      <div class="glass-card spotlight-card rounded-3xl p-6 sm:p-10 lg:p-12">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+          <div class="lg:col-span-7 space-y-5">
+            <div class="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-brandIndigo dark:text-brandCyan">
+              <i data-lucide="sparkles" class="w-4 h-4"></i>
+              <span>About NXT by Nafis</span>
+            </div>
+            <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight">
+              Where <span class="gradient-text">Full-Stack Code</span> Meets National-Standard IT Leadership
+            </h2>
+            <p class="text-slate-600 dark:text-slate-300 leading-relaxed">
+              I completed my Diploma in Engineering in <strong>Computer Science & Technology (CST) from Bogura Polytechnic Institute in 2024</strong>, followed by intensive Full-Stack Web Development training at <strong>NACTAR, Bogura</strong> and MERN Stack specialization from <strong>Programming Hero</strong>.
+            </p>
+            <p class="text-slate-600 dark:text-slate-300 leading-relaxed">
+              Since 2025, I have been serving as the <strong>Course Coordinator & Web Design and Development Trainer at Ruhul Information Technology (Ruhul IT)</strong> in Sherpur, Bogura, alongside operating as an <strong>NSDA Registered Trainer & Assessor</strong>. With 3x NSDA Level-3 certifications in Web Design & Development, Graphic Design, and Digital Marketing, I engineer complete digital solutions that excel in code quality, visual aesthetics, and search performance.
+            </p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-3">
+              <div class="p-4 rounded-2xl bg-slate-100/80 dark:bg-slate-800/50 border border-slate-200/60 dark:border-slate-700/50 flex items-start gap-3">
+                <i data-lucide="layers" class="w-5 h-5 text-brandIndigo shrink-0 mt-0.5"></i>
+                <div>
+                  <h4 class="font-bold text-sm">Production MERN Stack</h4>
+                  <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Modern React UI, REST APIs, Node/Express, MongoDB, Firebase & Cloud Spreadsheet Automation.</p>
+                </div>
+              </div>
+              <div class="p-4 rounded-2xl bg-slate-100/80 dark:bg-slate-800/50 border border-slate-200/60 dark:border-slate-700/50 flex items-start gap-3">
+                <i data-lucide="award" class="w-5 h-5 text-brandCyan shrink-0 mt-0.5"></i>
+                <div>
+                  <h4 class="font-bold text-sm">NSDA Trainer & Assessor</h4>
+                  <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Leading CBT&A curriculum, trainee evaluations, and IT operations at Ruhul IT Campus.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="lg:col-span-5 space-y-4">
+            <div class="p-6 rounded-2xl bg-gradient-to-br from-brandIndigo/15 to-brandCyan/10 border border-brandIndigo/30 space-y-3">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-mono uppercase tracking-wider text-brandCyan">The 4-Pillar Advantage</span>
+                <i data-lucide="cpu" class="w-5 h-5 text-brandCyan"></i>
+              </div>
+              <h3 class="text-lg font-bold">Complete Digital Ecosystem Builder</h3>
+              <ul class="space-y-2.5 text-sm text-slate-600 dark:text-slate-300">
+                <li class="flex items-center gap-2.5">
+                  <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400 shrink-0"></i>
+                  <span><strong>Engineering:</strong> Full-Stack MERN & Custom CMS</span>
+                </li>
+                <li class="flex items-center gap-2.5">
+                  <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400 shrink-0"></i>
+                  <span><strong>Visual Design:</strong> NSDA L-3 Graphic & UI/UX Precision</span>
+                </li>
+                <li class="flex items-center gap-2.5">
+                  <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400 shrink-0"></i>
+                  <span><strong>Marketing:</strong> NSDA L-3 SEO & Growth Strategy</span>
+                </li>
+                <li class="flex items-center gap-2.5">
+                  <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400 shrink-0"></i>
+                  <span><strong>Leadership:</strong> Course Coordinator @ Ruhul IT</span>
+                </li>
+              </ul>
+            </div>
+
+            <div class="p-5 rounded-2xl glass-card flex items-center justify-between">
+              <div>
+                <p class="text-xs font-mono text-slate-400">Direct Contact</p>
+                <p id="aboutLocation" class="font-bold text-sm">Sherpur, Bogura • +880 1739-626449</p>
+              </div>
+              <a href="#contact" class="px-4 py-2 rounded-xl bg-brandIndigo text-white text-xs font-semibold hover:bg-brandIndigo/90 transition">
+                Hire Me
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. SKILLS BENTO GRID SECTION -->
+    <section id="skills" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 reveal">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+        <div>
+          <div class="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-brandIndigo dark:text-brandCyan mb-2">
+            <i data-lucide="terminal" class="w-4 h-4"></i>
+            <span>Technical Arsenal</span>
+          </div>
+          <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight">Skills <span class="gradient-text">Bento Grid</span></h2>
+        </div>
+        <p class="text-sm text-slate-500 dark:text-slate-400 max-w-md">
+          Categorized competencies across full-stack JavaScript, cloud databases, creative design, and national assessment standards.
+        </p>
+      </div>
+
+      <div id="skillsGridContainer" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Populated dynamically -->
+      </div>
+    </section>
+
+    <!-- 4. EXPERIENCE, EDUCATION & CERTIFICATIONS -->
+    <section id="experience" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 reveal">
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <div class="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-brandIndigo dark:text-brandCyan mb-2">
+          <i data-lucide="briefcase" class="w-4 h-4"></i>
+          <span>Career & Credentials</span>
+        </div>
+        <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight">Experience, <span class="gradient-text">Education & NSDA Certs</span></h2>
+      </div>
+
+      <!-- Filter Tabs -->
+      <div class="flex flex-wrap justify-center gap-3 mb-10">
+        <button onclick="filterJourney('all')" id="journeyTab-all" class="journey-tab px-5 py-2.5 rounded-xl text-sm font-semibold bg-brandIndigo text-white shadow-lg shadow-brandIndigo/25 transition-all">
+          All Milestones
+        </button>
+        <button onclick="filterJourney('experience')" id="journeyTab-experience" class="journey-tab px-5 py-2.5 rounded-xl text-sm font-semibold glass-card hover:border-brandIndigo/50 transition-all">
+          Work Experience
+        </button>
+        <button onclick="filterJourney('education')" id="journeyTab-education" class="journey-tab px-5 py-2.5 rounded-xl text-sm font-semibold glass-card hover:border-brandIndigo/50 transition-all">
+          Education & Courses
+        </button>
+        <button onclick="filterJourney('certification')" id="journeyTab-certification" class="journey-tab px-5 py-2.5 rounded-xl text-sm font-semibold glass-card hover:border-brandIndigo/50 transition-all">
+          NSDA Certifications
+        </button>
+      </div>
+
+      <div id="journeyContainer" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Populated dynamically -->
+      </div>
+    </section>
+
+    <!-- 5. FEATURED PROJECTS SECTION -->
+    <section id="projects" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 reveal">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6">
+        <div>
+          <div class="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-brandIndigo dark:text-brandCyan mb-2">
+            <i data-lucide="folder-git-2" class="w-4 h-4"></i>
+            <span>Selected Works</span>
+          </div>
+          <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight">Featured <span class="gradient-text">Projects</span></h2>
+        </div>
+
+        <!-- Category Filters -->
+        <div class="flex flex-wrap gap-2">
+          <button onclick="filterProjects('All')" data-cat="All" class="proj-filter-btn px-4 py-2 rounded-xl text-xs font-mono font-semibold bg-brandIndigo text-white shadow-md shadow-brandIndigo/20 transition-all">All</button>
+          <button onclick="filterProjects('MERN Stack')" data-cat="MERN Stack" class="proj-filter-btn px-4 py-2 rounded-xl text-xs font-mono font-semibold glass-card hover:border-brandIndigo/40 transition-all">MERN Stack</button>
+          <button onclick="filterProjects('Web App')" data-cat="Web App" class="proj-filter-btn px-4 py-2 rounded-xl text-xs font-mono font-semibold glass-card hover:border-brandIndigo/40 transition-all">Web App</button>
+          <button onclick="filterProjects('UI/Frontend')" data-cat="UI/Frontend" class="proj-filter-btn px-4 py-2 rounded-xl text-xs font-mono font-semibold glass-card hover:border-brandIndigo/40 transition-all">UI/Frontend</button>
+        </div>
+      </div>
+
+      <div id="projectsGrid" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Populated dynamically -->
+      </div>
+    </section>
+
+    <!-- 6. SERVICES & MENTORSHIP SECTION -->
+    <section id="services" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 reveal">
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <div class="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-brandIndigo dark:text-brandCyan mb-2">
+          <i data-lucide="zap" class="w-4 h-4"></i>
+          <span>What I Deliver</span>
+        </div>
+        <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight">Services & <span class="gradient-text">Expertise</span></h2>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="glass-card spotlight-card rounded-2xl p-6 hover:-translate-y-1.5 transition-all duration-300 border-t-2 border-t-brandIndigo">
+          <div class="w-12 h-12 rounded-xl bg-brandIndigo/15 text-brandIndigo flex items-center justify-center mb-5">
+            <i data-lucide="code" class="w-6 h-6"></i>
+          </div>
+          <h3 class="text-lg font-bold mb-2">MERN Stack Web Apps</h3>
+          <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
+            End-to-end custom web applications with React.js, Node.js, Express, MongoDB, and secure authentication.
+          </p>
+        </div>
+
+        <div class="glass-card spotlight-card rounded-2xl p-6 hover:-translate-y-1.5 transition-all duration-300 border-t-2 border-t-brandCyan">
+          <div class="w-12 h-12 rounded-xl bg-brandCyan/15 text-brandCyan flex items-center justify-center mb-5">
+            <i data-lucide="layout" class="w-6 h-6"></i>
+          </div>
+          <h3 class="text-lg font-bold mb-2">Responsive UI & Portals</h3>
+          <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
+            High-converting landing pages, institutional portals, and interactive dashboards with Tailwind CSS.
+          </p>
+        </div>
+
+        <div class="glass-card spotlight-card rounded-2xl p-6 hover:-translate-y-1.5 transition-all duration-300 border-t-2 border-t-emerald-500">
+          <div class="w-12 h-12 rounded-xl bg-emerald-500/15 text-emerald-400 flex items-center justify-center mb-5">
+            <i data-lucide="trending-up" class="w-6 h-6"></i>
+          </div>
+          <h3 class="text-lg font-bold mb-2">SEO & Brand Identity</h3>
+          <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
+            Complete visual branding, vector graphics, and on-page SEO backed by NSDA Level-3 certifications.
+          </p>
+        </div>
+
+        <div class="glass-card spotlight-card rounded-2xl p-6 hover:-translate-y-1.5 transition-all duration-300 border-t-2 border-t-purple-500">
+          <div class="w-12 h-12 rounded-xl bg-purple-500/15 text-purple-400 flex items-center justify-center mb-5">
+            <i data-lucide="users" class="w-6 h-6"></i>
+          </div>
+          <h3 class="text-lg font-bold mb-2">NSDA Training & Assessment</h3>
+          <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
+            Competency-Based Training & Assessment (CBT&A), bootcamp coordination, and career mentorship.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. CONTACT SECTION -->
+    <section id="contact" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 reveal">
+      <div class="glass-card spotlight-card rounded-3xl p-6 sm:p-10 lg:p-12">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+          
+          <!-- Contact Info Column -->
+          <div class="lg:col-span-5 space-y-6">
+            <div>
+              <div class="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-brandIndigo dark:text-brandCyan mb-2">
+                <i data-lucide="send" class="w-4 h-4"></i>
+                <span>Direct Communication</span>
+              </div>
+              <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight">Let's Work <span class="gradient-text">Together</span></h2>
+              <p class="text-sm text-slate-500 dark:text-slate-400 mt-3 leading-relaxed">
+                Looking to build a modern web application, collaborate on an IT project, or inquire about training programs? Reach out directly or send a message below.
+              </p>
+            </div>
+
+            <div class="space-y-4 pt-2">
+              <div class="flex items-center gap-4 p-4 rounded-2xl bg-slate-100/80 dark:bg-slate-800/50 border border-slate-200/50 dark:border-slate-700/50">
+                <div class="w-11 h-11 rounded-xl bg-brandIndigo/15 text-brandIndigo flex items-center justify-center shrink-0">
+                  <i data-lucide="mail" class="w-5 h-5"></i>
+                </div>
+                <div class="overflow-hidden">
+                  <p class="text-xs font-mono text-slate-400">Official Email</p>
+                  <a id="contactEmailDisplay" href="mailto:mdnafisahmed67@gmail.com" class="font-semibold text-sm hover:text-brandCyan truncate block">mdnafisahmed67@gmail.com</a>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-4 p-4 rounded-2xl bg-slate-100/80 dark:bg-slate-800/50 border border-slate-200/50 dark:border-slate-700/50">
+                <div class="w-11 h-11 rounded-xl bg-emerald-500/15 text-emerald-400 flex items-center justify-center shrink-0">
+                  <i data-lucide="phone-call" class="w-5 h-5"></i>
+                </div>
+                <div>
+                  <p class="text-xs font-mono text-slate-400">Phone & WhatsApp</p>
+                  <a id="contactPhoneDisplay" href="https://wa.me/8801739626449" target="_blank" rel="noopener noreferrer" class="font-semibold text-sm hover:text-emerald-400 block">+880 1739-626449</a>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-4 p-4 rounded-2xl bg-slate-100/80 dark:bg-slate-800/50 border border-slate-200/50 dark:border-slate-700/50">
+                <div class="w-11 h-11 rounded-xl bg-brandCyan/15 text-brandCyan flex items-center justify-center shrink-0">
+                  <i data-lucide="map-pin" class="w-5 h-5"></i>
+                </div>
+                <div>
+                  <p class="text-xs font-mono text-slate-400">Location</p>
+                  <p id="contactLocationDisplay" class="font-semibold text-sm">Ruhul IT, Sherpur, Bogura, Bangladesh</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Contact Form Column -->
+          <div class="lg:col-span-7">
+            <form id="contactForm" onsubmit="handleContactSubmit(event)" class="space-y-4 bg-slate-100/60 dark:bg-slate-900/60 p-6 sm:p-8 rounded-2xl border border-slate-200/70 dark:border-slate-800">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs font-mono uppercase text-slate-500 dark:text-slate-400 mb-1.5">Your Name *</label>
+                  <input type="text" id="msgName" required placeholder="Enter your full name" class="w-full px-4 py-3 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm focus:outline-none focus:border-brandIndigo" />
+                </div>
+                <div>
+                  <label class="block text-xs font-mono uppercase text-slate-500 dark:text-slate-400 mb-1.5">Your Email *</label>
+                  <input type="email" id="msgEmail" required placeholder="you@example.com" class="w-full px-4 py-3 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm focus:outline-none focus:border-brandIndigo" />
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-xs font-mono uppercase text-slate-500 dark:text-slate-400 mb-1.5">Subject / Project Inquiry *</label>
+                <input type="text" id="msgSubject" required placeholder="e.g., Full-Stack Web App / Training Collaboration" class="w-full px-4 py-3 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm focus:outline-none focus:border-brandIndigo" />
+              </div>
+
+              <div>
+                <label class="block text-xs font-mono uppercase text-slate-500 dark:text-slate-400 mb-1.5">Message *</label>
+                <textarea id="msgBody" rows="4" required placeholder="Describe your project requirements, timeline, or question..." class="w-full px-4 py-3 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm focus:outline-none focus:border-brandIndigo"></textarea>
+              </div>
+
+              <button type="submit" id="contactSubmitBtn" class="w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-brandIndigo to-brandCyan text-white font-semibold shadow-lg shadow-brandIndigo/25 hover:opacity-95 transition-all flex items-center justify-center gap-2">
+                <i data-lucide="send" class="w-4 h-4"></i>
+                <span>Send Message</span>
+              </button>
+              <p id="contactFeedback" class="text-xs font-mono text-center hidden"></p>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Floating Quick WhatsApp Button -->
+  <a id="floatingWaBtn" href="https://wa.me/8801739626449" target="_blank" rel="noopener noreferrer" title="Chat on WhatsApp" class="fixed bottom-6 right-6 z-30 w-12 h-12 rounded-2xl bg-emerald-500 text-white shadow-xl shadow-emerald-500/30 flex items-center justify-center hover:scale-110 transition-transform">
+    <i data-lucide="message-circle" class="w-6 h-6"></i>
+  </a>
+
+  <!-- ================= CLEAN PUBLIC FOOTER (NO ADMIN BUTTONS) ================= -->
+  <footer class="relative z-10 border-t border-slate-200/80 dark:border-slate-800/80 py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-slate-500 dark:text-slate-400">
+      <div class="flex items-center gap-2">
+        <!-- Secret Easter Egg: Triple-clicking "NXT by Nafis" in footer also triggers Admin PIN on mobile -->
+        <span id="footerBrandTrigger" class="font-extrabold text-slate-800 dark:text-slate-200 select-none cursor-default">NXT by Nafis</span>
+        <span>— © <script>document.write(new Date().getFullYear())</script> Nafis Ahmed. All rights reserved.</span>
+      </div>
+      <div class="flex items-center gap-5 text-xs font-mono">
+        <a href="https://github.com/nafisahmed67" target="_blank" rel="noopener noreferrer" class="hover:text-brandCyan">GitHub</a>
+        <a href="https://www.linkedin.com/in/nafis-ahmed-a708b2398" target="_blank" rel="noopener noreferrer" class="hover:text-brandCyan">LinkedIn</a>
+        <a href="https://www.facebook.com/nafis2325" target="_blank" rel="noopener noreferrer" class="hover:text-brandCyan">Facebook</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ================= SECRET ADMIN DASHBOARD (CMS MODAL) ================= -->
+  <!-- Hidden from public. Opens ONLY via #/admin, /admin, ?admin, or Ctrl+Shift+A -->
+  <div id="adminModal" class="fixed inset-0 z-50 hidden bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-3 sm:p-6">
+    
+    <!-- PIN Lock Screen -->
+    <div id="adminPinScreen" class="glass-card max-w-md w-full rounded-3xl p-8 text-center space-y-5 border border-brandIndigo/40 shadow-2xl">
+      <div class="w-14 h-14 rounded-2xl bg-brandIndigo/20 text-brandCyan flex items-center justify-center mx-auto">
+        <i data-lucide="shield-lock" class="w-7 h-7"></i>
+      </div>
+      <div>
+        <h3 class="text-2xl font-extrabold text-white">NXT Admin Gateway</h3>
+        <p class="text-xs font-mono text-slate-400 mt-1">Authorized Access Only • Nafis Ahmed</p>
+      </div>
+      <form onsubmit="verifyAdminPin(event)" class="space-y-4">
+        <input type="password" id="adminPinInput" placeholder="Enter Security PIN" class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-700 text-center font-mono text-lg tracking-widest text-white focus:outline-none focus:border-brandCyan" />
+        <p id="pinErrorMsg" class="text-xs text-rose-400 hidden">Invalid Security PIN!</p>
+        <div class="flex gap-3">
+          <button type="button" onclick="closeAdminModal()" class="w-1/2 py-2.5 rounded-xl bg-slate-800 text-slate-300 text-sm font-semibold hover:bg-slate-700">Exit</button>
+          <button type="submit" class="w-1/2 py-2.5 rounded-xl bg-gradient-to-r from-brandIndigo to-brandCyan text-white text-sm font-semibold">Unlock CMS</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Main CMS Dashboard Panel -->
+    <div id="adminDashboardPanel" class="hidden bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 w-full max-w-6xl h-[90vh] rounded-3xl shadow-2xl flex flex-col overflow-hidden">
+      
+      <!-- Top Header -->
+      <div class="px-6 py-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between bg-slate-50 dark:bg-slate-950">
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-brandIndigo to-brandCyan flex items-center justify-center text-white font-extrabold text-sm">
+            NXT
+          </div>
+          <div>
+            <h3 class="font-bold text-base">NXT by Nafis — Headless CMS</h3>
+            <p class="text-xs font-mono text-slate-400">Dynamic Portfolio Controller + Google Sheets Sync</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-2">
+          <button onclick="syncToGoogleSheets()" class="px-3.5 py-2 rounded-xl bg-emerald-500/15 text-emerald-400 hover:bg-emerald-500/25 text-xs font-mono font-semibold flex items-center gap-1.5 transition">
+            <i data-lucide="cloud-upload" class="w-4 h-4"></i>
+            <span class="hidden sm:inline">Push to Google Sheet</span>
+          </button>
+          <button onclick="closeAdminModal()" class="p-2 rounded-xl bg-slate-200 dark:bg-slate-800 hover:bg-rose-500 hover:text-white transition" title="Close Admin Panel">
+            <i data-lucide="x" class="w-5 h-5"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Body -->
+      <div class="flex-1 flex flex-col md:flex-row overflow-hidden">
+        
+        <!-- Sidebar Tabs -->
+        <div class="w-full md:w-60 border-b md:border-b-0 md:border-r border-slate-200 dark:border-slate-800 p-3 flex md:flex-col gap-1.5 overflow-x-auto bg-slate-50/50 dark:bg-slate-950/40 shrink-0">
+          <button onclick="switchAdminTab('profile')" id="admTabBtn-profile" class="adm-tab-btn px-4 py-2.5 rounded-xl text-left text-xs font-semibold flex items-center gap-2.5 bg-brandIndigo text-white">
+            <i data-lucide="user" class="w-4 h-4 shrink-0"></i><span>Profile & Socials</span>
+          </button>
+          <button onclick="switchAdminTab('projects')" id="admTabBtn-projects" class="adm-tab-btn px-4 py-2.5 rounded-xl text-left text-xs font-semibold flex items-center gap-2.5 hover:bg-slate-200/60 dark:hover:bg-slate-800">
+            <i data-lucide="folder-kanban" class="w-4 h-4 shrink-0"></i><span>Manage Projects</span>
+          </button>
+          <button onclick="switchAdminTab('journey')" id="admTabBtn-journey" class="adm-tab-btn px-4 py-2.5 rounded-xl text-left text-xs font-semibold flex items-center gap-2.5 hover:bg-slate-200/60 dark:hover:bg-slate-800">
+            <i data-lucide="briefcase" class="w-4 h-4 shrink-0"></i><span>Experience & Edu</span>
+          </button>
+          <button onclick="switchAdminTab('skills')" id="admTabBtn-skills" class="adm-tab-btn px-4 py-2.5 rounded-xl text-left text-xs font-semibold flex items-center gap-2.5 hover:bg-slate-200/60 dark:hover:bg-slate-800">
+            <i data-lucide="cpu" class="w-4 h-4 shrink-0"></i><span>Manage Skills</span>
+          </button>
+          <button onclick="switchAdminTab('messages')" id="admTabBtn-messages" class="adm-tab-btn px-4 py-2.5 rounded-xl text-left text-xs font-semibold flex items-center justify-between hover:bg-slate-200/60 dark:hover:bg-slate-800">
+            <span class="flex items-center gap-2.5"><i data-lucide="inbox" class="w-4 h-4 shrink-0"></i><span>Inbox</span></span>
+            <span id="admMsgCountBadge" class="px-2 py-0.5 rounded-full text-[10px] bg-brandCyan/20 text-brandCyan font-mono">0</span>
+          </button>
+          <button onclick="switchAdminTab('cloud')" id="admTabBtn-cloud" class="adm-tab-btn px-4 py-2.5 rounded-xl text-left text-xs font-semibold flex items-center gap-2.5 hover:bg-slate-200/60 dark:hover:bg-slate-800">
+            <i data-lucide="database" class="w-4 h-4 shrink-0"></i><span>Google Sheet Sync</span>
+          </button>
+        </div>
+
+        <!-- Tab Content Container -->
+        <div class="flex-1 p-6 overflow-y-auto space-y-6">
+
+          <!-- TAB 1: PROFILE, SOCIALS & STATS -->
+          <div id="admTab-profile" class="adm-tab-panel space-y-6">
+            <h4 class="text-lg font-bold border-b border-slate-200 dark:border-slate-800 pb-2">Profile, Contact & Social Links</h4>
+            <form onsubmit="saveProfileSettings(event)" class="space-y-4">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs font-mono mb-1">Full Name</label>
+                  <input type="text" id="editName" class="w-full px-3.5 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-sm" />
+                </div>
+                <div>
+                  <label class="block text-xs font-mono mb-1">Top Badge Tagline</label>
+                  <input type="text" id="editBadge" class="w-full px-3.5 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-sm" />
+                </div>
+                <div>
+                  <label class="block text-xs font-mono mb-1">Profile Photo URL (Google Drive Share Link Supported)</label>
+                  <input type="text" id="editAvatarUrl" class="w-full px-3.5 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-sm" />
+                </div>
+                <div>
+                  <label class="block text-xs font-mono mb-1">Or Upload Photo From Device</label>
+                  <input type="file" accept="image/*" onchange="handleLocalPhotoUpload(event)" class="w-full px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-xs" />
+                </div>
+                <div>
+                  <label class="block text-xs font-mono mb-1">Email</label>
+                  <input type="email" id="editEmail" class="w-full px-3.5 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-sm" />
+                </div>
+                <div>
+                  <label class="block text-xs font-mono mb-1">Phone / WhatsApp</label>
+                  <input type="text" id="editPhone" class="w-full px-3.5 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-sm" />
+                </div>
+                <div>
+                  <label class="block text-xs font-mono mb-1">Location</label>
+                  <input type="text" id="editLocation" class="w-full px-3.5 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-sm" />
+                </div>
+                <div>
+                  <label class="block text-xs font-mono mb-1">CV / Resume URL</label>
+                  <input type="text" id="editCvUrl" class="w-full px-3.5 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-sm" />
+                </div>
+              </div>
+
+              <!-- Social Links Editor -->
+              <h5 class="font-bold text-sm pt-2">Social Media URLs</h5>
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div>
+                  <label class="block text-[11px] font-mono text-slate-400">GitHub URL</label>
+                  <input type="url" id="editGithub" class="w-full px-3 py-2 rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-700 text-xs" />
+                </div>
+                <div>
+                  <label class="block text-[11px] font-mono text-slate-400">LinkedIn URL</label>
+                  <input type="url" id="editLinkedin" class="w-full px-3 py-2 rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-700 text-xs" />
+                </div>
+                <div>
+                  <label class="block text-[11px] font-mono text-slate-400">Facebook URL</label>
+                  <input type="url" id="editFacebook" class="w-full px-3 py-2 rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-700 text-xs" />
+                </div>
+                <div>
+                  <label class="block text-[11px] font-mono text-slate-400">Twitter (X) URL</label>
+                  <input type="url" id="editTwitter" class="w-full px-3 py-2 rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-700 text-xs" />
+                </div>
+                <div>
+                  <label class="block text-[11px] font-mono text-slate-400">Instagram URL</label>
+                  <input type="url" id="editInstagram" class="w-full px-3 py-2 rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-700 text-xs" />
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-xs font-mono mb-1">Hero Bio Paragraph</label>
+                <textarea id="editBio" rows="3" class="w-full px-3.5 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-sm"></textarea>
+              </div>
+
+              <h5 class="font-bold text-sm pt-2">Stats Counters</h5>
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                <div>
+                  <label class="block text-[11px] font-mono text-slate-400">Years Exp.</label>
+                  <input type="text" id="statExp" class="w-full px-3 py-2 rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-700 text-sm font-bold" />
+                </div>
+                <div>
+                  <label class="block text-[11px] font-mono text-slate-400">Projects Done</label>
+                  <input type="text" id="statProj" class="w-full px-3 py-2 rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-700 text-sm font-bold" />
+                </div>
+                <div>
+                  <label class="block text-[11px] font-mono text-slate-400">Students Trained</label>
+                  <input type="text" id="statStudents" class="w-full px-3 py-2 rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-700 text-sm font-bold" />
+                </div>
+                <div>
+                  <label class="block text-[11px] font-mono text-slate-400">NSDA Certs</label>
+                  <input type="text" id="statCerts" class="w-full px-3 py-2 rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-700 text-sm font-bold" />
+                </div>
+              </div>
+
+              <button type="submit" class="px-6 py-3 rounded-xl bg-brandIndigo text-white font-semibold text-sm hover:bg-brandIndigo/90 transition">
+                Save Profile & Socials
+              </button>
+            </form>
+          </div>
+
+          <!-- TAB 2: MANAGE PROJECTS -->
+          <div id="admTab-projects" class="adm-tab-panel hidden space-y-6">
+            <div class="bg-slate-100/70 dark:bg-slate-800/50 p-5 rounded-2xl border border-slate-200 dark:border-slate-800">
+              <h4 id="projFormTitle" class="font-bold text-base mb-4">Add New Project</h4>
+              <form id="projectForm" onsubmit="saveProject(event)" class="space-y-4">
+                <input type="hidden" id="projId" />
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                  <div>
+                    <label class="block text-xs font-mono mb-1">Project Title *</label>
+                    <input type="text" id="projTitle" required placeholder="e.g., Ruhul IT Portal" class="w-full px-3 py-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-sm" />
+                  </div>
+                  <div>
+                    <label class="block text-xs font-mono mb-1">Category *</label>
+                    <select id="projCategory" class="w-full px-3 py-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-sm">
+                      <option value="MERN Stack">MERN Stack</option>
+                      <option value="Web App">Web App</option>
+                      <option value="UI/Frontend">UI/Frontend</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label class="block text-xs font-mono mb-1">Image URL (or Drive Share Link)</label>
+                    <input type="text" id="projImage" placeholder="https://..." class="w-full px-3 py-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-sm" />
+                  </div>
+                </div>
+
+                <div>
+                  <label class="block text-xs font-mono mb-1">Description *</label>
+                  <textarea id="projDesc" rows="2" required placeholder="Key features & architecture..." class="w-full px-3 py-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-sm"></textarea>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                  <div>
+                    <label class="block text-xs font-mono mb-1">Tech Tags (Comma separated)</label>
+                    <input type="text" id="projTech" placeholder="React, Node.js, MongoDB" class="w-full px-3 py-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-sm" />
+                  </div>
+                  <div>
+                    <label class="block text-xs font-mono mb-1">Live Demo URL</label>
+                    <input type="text" id="projLive" placeholder="https://..." class="w-full px-3 py-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-sm" />
+                  </div>
+                  <div>
+                    <label class="block text-xs font-mono mb-1">GitHub Repo URL</label>
+                    <input type="text" id="projGithub" placeholder="https://github.com/..." class="w-full px-3 py-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-sm" />
+                  </div>
+                </div>
+
+                <div class="flex gap-3">
+                  <button type="submit" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-brandIndigo to-brandCyan text-white text-xs font-semibold">Save Project</button>
+                  <button type="button" onclick="resetProjectForm()" class="px-4 py-2.5 rounded-xl bg-slate-200 dark:bg-slate-700 text-xs font-semibold">Clear</button>
+                </div>
+              </form>
+            </div>
+
+            <div>
+              <h4 class="font-bold text-base mb-3">Current Projects</h4>
+              <div id="admProjectsList" class="space-y-3"></div>
+            </div>
+          </div>
+
+          <!-- TAB 3: MANAGE EXPERIENCE, EDUCATION & CERTIFICATIONS -->
+          <div id="admTab-journey" class="adm-tab-panel hidden space-y-6">
+            <div class="bg-slate-100/70 dark:bg-slate-800/50 p-5 rounded-2xl border border-slate-200 dark:border-slate-800">
+              <h4 class="font-bold text-base mb-4">Add Work Experience / Education / Certification</h4>
+              <form id="journeyForm" onsubmit="saveJourneyItem(event)" class="space-y-4">
+                <input type="hidden" id="journeyId" />
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                  <div>
+                    <label class="block text-xs font-mono mb-1">Category *</label>
+                    <select id="journeyType" class="w-full px-3 py-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-sm">
+                      <option value="experience">Work Experience</option>
+                      <option value="education">Education & Courses</option>
+                      <option value="certification">NSDA Certification</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label class="block text-xs font-mono mb-1">Title / Role *</label>
+                    <input type="text" id="journeyTitle" required placeholder="e.g., Senior MERN Developer" class="w-full px-3 py-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-sm" />
+                  </div>
+                  <div>
+                    <label class="block text-xs font-mono mb-1">Organization / Institute *</label>
+                    <input type="text" id="journeyOrg" required placeholder="e.g., Ruhul IT" class="w-full px-3 py-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-sm" />
+                  </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                  <div>
+                    <label class="block text-xs font-mono mb-1">Time Period *</label>
+                    <input type="text" id="journeyPeriod" required placeholder="e.g., 2025 – Present" class="w-full px-3 py-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-sm" />
+                  </div>
+                  <div class="sm:col-span-2">
+                    <label class="block text-xs font-mono mb-1">Highlights *</label>
+                    <input type="text" id="journeyDesc" required placeholder="Responsibilities & achievements..." class="w-full px-3 py-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-sm" />
+                  </div>
+                </div>
+
+                <div class="flex gap-3">
+                  <button type="submit" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-brandIndigo to-brandCyan text-white text-xs font-semibold">Save Entry</button>
+                  <button type="button" onclick="resetJourneyForm()" class="px-4 py-2.5 rounded-xl bg-slate-200 dark:bg-slate-700 text-xs font-semibold">Clear</button>
+                </div>
+              </form>
+            </div>
+
+            <div>
+              <h4 class="font-bold text-base mb-3">Existing Entries</h4>
+              <div id="admJourneyList" class="space-y-3"></div>
+            </div>
+          </div>
+
+          <!-- TAB 4: MANAGE SKILLS -->
+          <div id="admTab-skills" class="adm-tab-panel hidden space-y-6">
+            <div class="bg-slate-100/70 dark:bg-slate-800/50 p-5 rounded-2xl border border-slate-200 dark:border-slate-800">
+              <h4 class="font-bold text-base mb-3">Add New Skill Badge</h4>
+              <form onsubmit="addSkillItem(event)" class="flex flex-wrap gap-3">
+                <select id="newSkillCat" class="px-3.5 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-sm">
+                  <option value="0">Frontend Development</option>
+                  <option value="1">Backend & Database</option>
+                  <option value="2">Graphic & UI/UX Design</option>
+                  <option value="3">Digital Marketing & Training</option>
+                </select>
+                <input type="text" id="newSkillName" required placeholder="e.g., Next.js, TypeScript, Prisma" class="flex-1 min-w-[200px] px-3.5 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-sm" />
+                <button type="submit" class="px-5 py-2.5 rounded-xl bg-brandIndigo text-white text-xs font-semibold">+ Add Skill</button>
+              </form>
+            </div>
+            <div id="admSkillsManager" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+          </div>
+
+          <!-- TAB 5: INBOX MESSAGES -->
+          <div id="admTab-messages" class="adm-tab-panel hidden space-y-4">
+            <div class="flex items-center justify-between">
+              <h4 class="font-bold text-base">Contact Form Messages</h4>
+              <button onclick="clearAllMessages()" class="text-xs text-rose-400 hover:underline">Delete All</button>
+            </div>
+            <div id="admMessagesList" class="space-y-3"></div>
+          </div>
+
+          <!-- TAB 6: GOOGLE SHEETS SYNC -->
+          <div id="admTab-cloud" class="adm-tab-panel hidden space-y-6">
+            <div class="p-5 rounded-2xl bg-brandIndigo/10 border border-brandIndigo/30 space-y-4">
+              <h4 class="font-bold text-base flex items-center gap-2">
+                <i data-lucide="sheet" class="w-5 h-5 text-brandCyan"></i>
+                <span>Google Sheets & Drive Cloud Backend</span>
+              </h4>
+              <p class="text-xs text-slate-500 dark:text-slate-300 leading-relaxed">
+                Paste your deployed <strong>Google Apps Script Web App URL</strong> below to sync your portfolio data and contact messages directly with your Google Sheet.
+              </p>
+
+              <div class="flex flex-col sm:flex-row gap-2">
+                <input type="url" id="gasWebAppUrl" placeholder="https://script.google.com/macros/s/AKfycb.../exec" class="flex-1 px-3.5 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-xs font-mono" />
+                <button onclick="saveGasUrl()" class="px-5 py-2.5 rounded-xl bg-brandIndigo text-white text-xs font-semibold shrink-0">Save URL</button>
+              </div>
+
+              <div class="flex flex-wrap gap-3 pt-2">
+                <button onclick="syncToGoogleSheets()" class="px-4 py-2.5 rounded-xl bg-emerald-600 text-white text-xs font-semibold flex items-center gap-2 hover:bg-emerald-500">
+                  <i data-lucide="upload-cloud" class="w-4 h-4"></i>
+                  <span>Push Local Data to Sheet</span>
+                </button>
+                <button onclick="pullFromGoogleSheets()" class="px-4 py-2.5 rounded-xl bg-brandCyan text-slate-950 text-xs font-semibold flex items-center gap-2 hover:opacity-90">
+                  <i data-lucide="download-cloud" class="w-4 h-4"></i>
+                  <span>Pull Data from Sheet</span>
+                </button>
+              </div>
+              <p id="cloudSyncStatusMsg" class="text-xs font-mono text-brandCyan"></p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div class="p-5 rounded-2xl bg-slate-100 dark:bg-slate-800/50 space-y-3">
+                <h5 class="font-bold text-sm">Change Security PIN</h5>
+                <div class="flex gap-2">
+                  <input type="password" id="newAdminPin" placeholder="New PIN (Default: 2026)" class="flex-1 px-3 py-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-700 text-xs font-mono" />
+                  <button onclick="updateAdminPin()" class="px-4 py-2 rounded-xl bg-brandIndigo text-white text-xs font-semibold">Update</button>
+                </div>
+              </div>
+
+              <div class="p-5 rounded-2xl bg-slate-100 dark:bg-slate-800/50 space-y-3">
+                <h5 class="font-bold text-sm">Backup & Factory Reset</h5>
+                <div class="flex flex-wrap gap-2">
+                  <button onclick="exportPortfolioJson()" class="px-3.5 py-2 rounded-xl bg-slate-700 text-white text-xs font-semibold">Export JSON</button>
+                  <button onclick="resetToDefaultData()" class="px-3.5 py-2 rounded-xl bg-rose-500/20 text-rose-400 border border-rose-500/30 text-xs font-semibold">Reset Default</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ================= APPLICATION JAVASCRIPT ================= -->
+  <script>
+    // --- 1. VERIFIED DEFAULT DATA FOR NAFIS AHMED (NXT BY NAFIS) ---
+    const DEFAULT_PORTFOLIO_DATA = {
+      adminPin: "2026",
+      gasUrl: "",
+      profile: {
+        name: "Nafis Ahmed",
+        badge: "MERN Stack Developer | NSDA Trainer & Assessor",
+        roles: [
+          "MERN Stack Developer",
+          "NSDA Certified Trainer & Assessor",
+          "Course Coordinator at Ruhul IT",
+          "Digital Marketer & Graphic Designer"
+        ],
+        bio: "Full-Stack Web Developer specializing in the MERN Stack, Course Coordinator & Trainer at Ruhul Information Technology (Ruhul IT), and NSDA Certified Trainer & Assessor. Blending scalable engineering, graphic design, and digital marketing into high-impact web products.",
+        avatarUrl: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80",
+        email: "mdnafisahmed67@gmail.com",
+        phone: "+880 1739-626449",
+        location: "Sherpur, Bogura, Bangladesh",
+        cvUrl: "#contact",
+        socials: {
+          github: "https://github.com/nafisahmed67",
+          linkedin: "https://www.linkedin.com/in/nafis-ahmed-a708b2398",
+          facebook: "https://www.facebook.com/nafis2325",
+          twitter: "https://x.com",
+          instagram: "https://instagram.com"
+        },
+        stats: {
+          exp: "2+",
+          projects: "25+",
+          students: "500+",
+          certs: "3x"
+        }
+      },
+      skills: [
+        {
+          category: "Frontend Development",
+          icon: "layout",
+          items: ["React.js", "JavaScript (ES6+)", "Tailwind CSS", "HTML5 & CSS3", "Bootstrap 5", "Responsive Architecture", "REST API Integration"]
+        },
+        {
+          category: "Backend & Database",
+          icon: "database",
+          items: ["Node.js", "Express.js", "MongoDB Atlas", "Firebase Auth & Firestore", "JWT Security", "Google Apps Script API"]
+        },
+        {
+          category: "Graphic & UI/UX Design",
+          icon: "pen-tool",
+          items: ["Figma UI/UX", "Adobe Illustrator", "Adobe Photoshop", "Brand Identity", "Print & Layout Design", "Vector Illustration"]
+        },
+        {
+          category: "Digital Marketing & CBT&A",
+          icon: "award",
+          items: ["On-Page & Technical SEO", "Social Media Marketing", "NSDA CBT&A Methodology", "Course Coordination", "Git & GitHub CI/CD"]
+        }
+      ],
+      journey: [
+        {
+          id: "j1",
+          type: "experience",
+          title: "Course Coordinator & Web Design/Development Trainer",
+          org: "Ruhul Information Technology (Ruhul IT), Sherpur, Bogura",
+          period: "2025 – Present",
+          desc: "Directing training operations, curriculum management, trainee assessments, and mentoring Full-Stack Web Design & Development batches."
+        },
+        {
+          id: "j2",
+          type: "experience",
+          title: "NSDA Registered Trainer & Assessor (Web Design & Development)",
+          org: "National Skills Development Authority (NSDA)",
+          period: "2025 – Present",
+          desc: "Conducting Competency-Based Training & Assessment (CBT&A), preparing specification sheets, and evaluating candidates according to national standards."
+        },
+        {
+          id: "j3",
+          type: "experience",
+          title: "Full-Stack Web Developer (MERN Stack)",
+          org: "NXT by Nafis — Freelance & Custom Solutions",
+          period: "2024 – Present",
+          desc: "Architecting full-stack web applications, headless CMS dashboards, and high-converting business portals using React, Node.js, MongoDB, and Firebase."
+        },
+        {
+          id: "j4",
+          type: "education",
+          title: "Diploma in Engineering — Computer Science & Technology (CST)",
+          org: "Bogura Polytechnic Institute, Bogura",
+          period: "Graduated 2024",
+          desc: "Completed 4-year Diploma in Engineering in Computer Science & Technology with strong fundamentals in software development, algorithms, and networking."
+        },
+        {
+          id: "j5",
+          type: "education",
+          title: "Complete Web Development Course (MERN Stack)",
+          org: "Programming Hero",
+          period: "Completed",
+          desc: "Intensive full-stack specialization mastering MongoDB, Express.js, React.js, Node.js, Firebase, Tailwind CSS, and JWT authentication."
+        },
+        {
+          id: "j6",
+          type: "education",
+          title: "Full-Stack Web Development Training",
+          org: "NACTAR (National Academy for Computer Training & Research), Bogura",
+          period: "Completed",
+          desc: "Comprehensive practical training in modern frontend and backend web application engineering."
+        },
+        {
+          id: "j7",
+          type: "certification",
+          title: "NSDA Level-3 Certified: Web Design & Development",
+          org: "National Skills Development Authority (NSDA)",
+          period: "Certified",
+          desc: "National competency certification in responsive web design, frontend engineering, and dynamic web development."
+        },
+        {
+          id: "j8",
+          type: "certification",
+          title: "NSDA Level-3 Certified: Graphic Design for Freelancing",
+          org: "National Skills Development Authority (NSDA)",
+          period: "Certified",
+          desc: "Certified in visual design principles, brand identity creation, Adobe Illustrator, and Adobe Photoshop production workflows."
+        },
+        {
+          id: "j9",
+          type: "certification",
+          title: "NSDA Level-3 Certified: Digital Marketing for Freelancing",
+          org: "National Skills Development Authority (NSDA)",
+          period: "Certified",
+          desc: "Certified in Search Engine Optimization (SEO), social media marketing campaigns, analytics, and organic/paid growth strategies."
+        }
+      ],
+      projects: [
+        {
+          id: "p1",
+          title: "Ruhul IT — Institutional Capability & Training Portal",
+          category: "MERN Stack",
+          image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=900&q=80",
+          desc: "Comprehensive institutional platform showcasing Ruhul IT's 7-story residential learning campus, course batches, trainee verification, and impact metrics.",
+          tech: ["React.js", "Tailwind CSS", "Node.js", "MongoDB"],
+          live: "#",
+          github: "https://github.com/nafisahmed67"
+        },
+        {
+          id: "p2",
+          title: "Smart Mess Management & Automated Meal Tracker",
+          category: "Web App",
+          image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=900&q=80",
+          desc: "Automated monthly meal accounting system featuring bazaar expense tracking, dynamic meal-rate calculation, and Google Sheets cloud synchronization.",
+          tech: ["JavaScript ES6+", "Tailwind CSS", "Google Sheets API"],
+          live: "#",
+          github: "https://github.com/nafisahmed67"
+        },
+        {
+          id: "p3",
+          title: "NSDA Competency Assessment & Exam Management System",
+          category: "MERN Stack",
+          image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=80",
+          desc: "Interactive CBT&A assessment platform with MCQ testing, job-sheet submission workflows, automated grading, and batch competency reports.",
+          tech: ["React.js", "Express.js", "MongoDB", "Firebase Auth"],
+          live: "#",
+          github: "https://github.com/nafisahmed67"
+        },
+        {
+          id: "p4",
+          title: "NXT E-Commerce & Real-Time Inventory Dashboard",
+          category: "UI/Frontend",
+          image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=900&q=80",
+          desc: "High-speed modern storefront featuring dynamic category filtering, promotional discount engine, cart management, and dark glassmorphic analytics.",
+          tech: ["React.js", "Tailwind CSS", "Context API", "Lucide Icons"],
+          live: "#",
+          github: "https://github.com/nafisahmed67"
+        }
+      ],
+      messages: [
+        {
+          id: "m1",
+          name: "NXT System",
+          email: "mdnafisahmed67@gmail.com",
+          subject: "Welcome to NXT by Nafis CMS!",
+          body: "Your secret admin panel is active. You can access this anytime via #/admin or pressing Ctrl + Shift + A.",
+          date: new Date().toLocaleDateString()
+        }
+      ]
+    };
+
+    // --- 2. STATE MANAGEMENT & HELPERS ---
+    const STORAGE_KEY = "nxt_by_nafis_cms_v2";
+    let state = loadState();
+    let activeProjectFilter = "All";
+    let activeJourneyFilter = "all";
+    let isAdminUnlocked = false;
+
+    function loadState() {
+      try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          return {
+            ...DEFAULT_PORTFOLIO_DATA,
+            ...parsed,
+            profile: {
+              ...DEFAULT_PORTFOLIO_DATA.profile,
+              ...(parsed.profile || {}),
+              socials: {
+                ...DEFAULT_PORTFOLIO_DATA.profile.socials,
+                ...((parsed.profile && parsed.profile.socials) || {})
+              },
+              stats: {
+                ...DEFAULT_PORTFOLIO_DATA.profile.stats,
+                ...((parsed.profile && parsed.profile.stats) || {})
+              }
+            }
+          };
+        }
+      } catch (e) {
+        console.error("State load error:", e);
+      }
+      return JSON.parse(JSON.stringify(DEFAULT_PORTFOLIO_DATA));
+    }
+
+    function saveState() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      renderAll();
+    }
+
+    function formatGoogleDriveUrl(url) {
+      if (!url) return "";
+      const trimmed = url.trim();
+      const matchId = trimmed.match(/\/d\/([a-zA-Z0-9_-]+)/) || trimmed.match(/[?&]id=([a-zA-Z0-9_-]+)/);
+      if (matchId && matchId[1] && trimmed.includes("drive.google.com")) {
+        return `https://lh3.googleusercontent.com/d/${matchId[1]}`;
+      }
+      return trimmed;
+    }
+
+    // --- 3. SECRET ADMIN URL & SHORTCUT ROUTER ---
+    function checkSecretAdminRoute() {
+      const hash = window.location.hash.toLowerCase();
+      const search = window.location.search.toLowerCase();
+      const path = window.location.pathname.toLowerCase();
+
+      if (
+        hash === "#/admin" ||
+        hash === "#admin" ||
+        search.includes("admin") ||
+        path.endsWith("/admin")
+      ) {
+        openAdminModal();
+      }
+    }
+
+    window.addEventListener("hashchange", checkSecretAdminRoute);
+
+    // Keyboard Shortcut: Ctrl + Shift + A (or Cmd + Shift + A)
+    window.addEventListener("keydown", (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key.toLowerCase() === "a") {
+        e.preventDefault();
+        openAdminModal();
+      }
+    });
+
+    // Mobile Secret Trigger: Triple-click on "NXT by Nafis" in Footer
+    let footerClickCount = 0;
+    let footerClickTimer = null;
+    document.addEventListener("DOMContentLoaded", () => {
+      const trigger = document.getElementById("footerBrandTrigger");
+      if (trigger) {
+        trigger.addEventListener("click", () => {
+          footerClickCount++;
+          clearTimeout(footerClickTimer);
+          if (footerClickCount >= 3) {
+            footerClickCount = 0;
+            openAdminModal();
+          } else {
+            footerClickTimer = setTimeout(() => { footerClickCount = 0; }, 600);
+          }
+        });
+      }
+    });
+
+    // --- 4. RENDER UI SECTIONS ---
+    function renderAll() {
+      renderProfile();
+      renderStats();
+      renderSkills();
+      renderJourney();
+      renderProjects();
+      renderAdminLists();
+      initSpotlightCards();
+      lucide.createIcons();
+    }
+
+    function renderProfile() {
+      const p = state.profile;
+      const s = p.socials || {};
+      const cleanDigits = (p.phone || "8801739626449").replace(/[^0-9]/g, "");
+      const waDigits = cleanDigits.startsWith("88") ? cleanDigits : "88" + cleanDigits;
+
+      document.getElementById("heroName").textContent = p.name;
+      document.getElementById("heroBadgeText").textContent = p.badge;
+      document.getElementById("heroBio").textContent = p.bio;
+      document.getElementById("heroProfileImg").src = formatGoogleDriveUrl(p.avatarUrl);
+      document.getElementById("heroCvBtn").href = p.cvUrl || "#contact";
+      document.getElementById("heroWhatsappBtn").href = `https://wa.me/${waDigits}`;
+      document.getElementById("floatingWaBtn").href = `https://wa.me/${waDigits}`;
+
+      // Social Icons
+      document.getElementById("socialGithub").href = s.github || "#";
+      document.getElementById("socialLinkedin").href = s.linkedin || "#";
+      document.getElementById("socialFacebook").href = s.facebook || "#";
+      document.getElementById("socialTwitter").href = s.twitter || "#";
+      document.getElementById("socialInstagram").href = s.instagram || "#";
+      document.getElementById("socialEmail").href = `mailto:${p.email}`;
+
+      // Contact Displays
+      document.getElementById("contactEmailDisplay").textContent = p.email;
+      document.getElementById("contactEmailDisplay").href = `mailto:${p.email}`;
+      document.getElementById("contactPhoneDisplay").textContent = p.phone;
+      document.getElementById("contactPhoneDisplay").href = `https://wa.me/${waDigits}`;
+      document.getElementById("contactLocationDisplay").textContent = p.location;
+      document.getElementById("aboutLocation").textContent = `${p.location} • ${p.phone}`;
+    }
+
+    function renderStats() {
+      const s = state.profile.stats;
+      const statsData = [
+        { value: s.exp, label: "Years Experience", icon: "code-2" },
+        { value: s.projects, label: "Completed Projects", icon: "folder-check" },
+        { value: s.students, label: "Students Trained", icon: "users" },
+        { value: s.certs, label: "NSDA Level-3 Certs", icon: "award" }
+      ];
+      document.getElementById("statsContainer").innerHTML = statsData.map(item => `
+        <div class="glass-card spotlight-card rounded-2xl p-5 flex items-center gap-4 hover:border-brandIndigo/40 transition-all">
+          <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-brandIndigo/20 to-brandCyan/20 text-brandCyan flex items-center justify-center shrink-0">
+            <i data-lucide="${item.icon}" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <p class="text-2xl sm:text-3xl font-extrabold gradient-text">${item.value}</p>
+            <p class="text-xs font-mono text-slate-500 dark:text-slate-400">${item.label}</p>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    function renderSkills() {
+      document.getElementById("skillsGridContainer").innerHTML = state.skills.map(cat => `
+        <div class="glass-card spotlight-card rounded-3xl p-6 sm:p-8 hover:border-brandIndigo/40 transition-all">
+          <div class="flex items-center gap-3 mb-5">
+            <div class="w-10 h-10 rounded-xl bg-brandIndigo/15 text-brandCyan flex items-center justify-center">
+              <i data-lucide="${cat.icon}" class="w-5 h-5"></i>
+            </div>
+            <h3 class="text-lg font-bold">${cat.category}</h3>
+          </div>
+          <div class="flex flex-wrap gap-2.5">
+            ${cat.items.map(skill => `
+              <span class="px-3.5 py-2 rounded-xl bg-slate-100 dark:bg-slate-800/90 border border-slate-200/80 dark:border-slate-700/70 text-xs font-mono font-medium hover:border-brandCyan hover:text-brandCyan transition-colors">
+                ${skill}
+              </span>
+            `).join("")}
+          </div>
+        </div>
+      `).join("");
+    }
+
+    function filterJourney(type) {
+      activeJourneyFilter = type;
+      document.querySelectorAll(".journey-tab").forEach(btn => {
+        btn.className = "journey-tab px-5 py-2.5 rounded-xl text-sm font-semibold glass-card hover:border-brandIndigo/50 transition-all";
+      });
+      const activeBtn = document.getElementById(`journeyTab-${type}`);
+      if (activeBtn) {
+        activeBtn.className = "journey-tab px-5 py-2.5 rounded-xl text-sm font-semibold bg-brandIndigo text-white shadow-lg shadow-brandIndigo/25 transition-all";
+      }
+      renderJourney();
+      initSpotlightCards();
+      lucide.createIcons();
+    }
+
+    function renderJourney() {
+      const filtered = activeJourneyFilter === "all"
+        ? state.journey
+        : state.journey.filter(item => item.type === activeJourneyFilter);
+
+      const badgeConfig = {
+        experience: { label: "Work Experience", icon: "briefcase", badgeClass: "bg-brandIndigo/15 text-brandIndigo dark:text-brandCyan border-brandIndigo/30" },
+        education: { label: "Education & Training", icon: "graduation-cap", badgeClass: "bg-brandCyan/15 text-brandCyan border-brandCyan/30" },
+        certification: { label: "NSDA Certification", icon: "award", badgeClass: "bg-emerald-500/15 text-emerald-400 border-emerald-500/30" }
+      };
+
+      document.getElementById("journeyContainer").innerHTML = filtered.map(item => {
+        const cfg = badgeConfig[item.type] || badgeConfig.experience;
+        return `
+          <div class="glass-card spotlight-card rounded-2xl p-6 hover:border-brandIndigo/40 transition-all flex flex-col justify-between">
+            <div>
+              <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-mono border ${cfg.badgeClass}">
+                  <i data-lucide="${cfg.icon}" class="w-3.5 h-3.5"></i>
+                  ${cfg.label}
+                </span>
+                <span class="text-xs font-mono text-slate-400">${item.period}</span>
+              </div>
+              <h3 class="text-lg font-bold">${item.title}</h3>
+              <p class="text-xs font-mono text-brandIndigo dark:text-brandCyan mt-1">${item.org}</p>
+              <p class="text-sm text-slate-600 dark:text-slate-300 mt-3 leading-relaxed">${item.desc}</p>
+            </div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    function filterProjects(category) {
+      activeProjectFilter = category;
+      document.querySelectorAll(".proj-filter-btn").forEach(btn => {
+        if (btn.dataset.cat === category) {
+          btn.className = "proj-filter-btn px-4 py-2 rounded-xl text-xs font-mono font-semibold bg-brandIndigo text-white shadow-md shadow-brandIndigo/20 transition-all";
+        } else {
+          btn.className = "proj-filter-btn px-4 py-2 rounded-xl text-xs font-mono font-semibold glass-card hover:border-brandIndigo/40 transition-all";
+        }
+      });
+      renderProjects();
+      initSpotlightCards();
+      lucide.createIcons();
+    }
+
+    function renderProjects() {
+      const list = activeProjectFilter === "All"
+        ? state.projects
+        : state.projects.filter(p => p.category === activeProjectFilter);
+
+      document.getElementById("projectsGrid").innerHTML = list.map(proj => `
+        <div class="glass-card spotlight-card rounded-3xl overflow-hidden group flex flex-col justify-between hover:border-brandIndigo/50 hover:-translate-y-1 transition-all duration-300">
+          <div>
+            <div class="relative h-56 overflow-hidden bg-slate-900">
+              <img src="${formatGoogleDriveUrl(proj.image)}" alt="${proj.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" onerror="this.src='https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80'" />
+              <div class="absolute top-3 left-3 px-3 py-1 rounded-full bg-slate-950/80 backdrop-blur-md text-brandCyan text-xs font-mono border border-white/10">
+                ${proj.category}
+              </div>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold group-hover:text-brandCyan transition-colors">${proj.title}</h3>
+              <p class="text-sm text-slate-600 dark:text-slate-300 mt-2 leading-relaxed">${proj.desc}</p>
+              <div class="flex flex-wrap gap-2 mt-4">
+                ${(proj.tech || []).map(t => `
+                  <span class="px-2.5 py-1 rounded-lg bg-slate-200/70 dark:bg-slate-800 text-[11px] font-mono text-slate-700 dark:text-slate-300">${t}</span>
+                `).join("")}
+              </div>
+            </div>
+          </div>
+          <div class="px-6 pb-6 pt-3 border-t border-slate-200/60 dark:border-slate-800/80 flex items-center justify-between">
+            <a href="${proj.live || '#'}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs font-semibold text-brandIndigo dark:text-brandCyan hover:underline">
+              <i data-lucide="external-link" class="w-4 h-4"></i> Live Preview
+            </a>
+            <a href="${proj.github || '#'}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs font-mono text-slate-500 hover:text-slate-900 dark:hover:text-white">
+              <i data-lucide="github" class="w-4 h-4"></i> Source Code
+            </a>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    // --- 5. MICRO-INTERACTIONS: SPOTLIGHT, TYPEWRITER & SCROLL REVEAL ---
+    function initSpotlightCards() {
+      document.querySelectorAll(".spotlight-card").forEach(card => {
+        card.onmousemove = (e) => {
+          const rect = card.getBoundingClientRect();
+          card.style.setProperty("--mouse-x", `${e.clientX - rect.left}px`);
+          card.style.setProperty("--mouse-y", `${e.clientY - rect.top}px`);
+        };
+      });
+    }
+
+    function initScrollRevealAndProgress() {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("active");
+          }
+        });
+      }, { threshold: 0.12 });
+
+      document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+
+      window.addEventListener("scroll", () => {
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+        const bar = document.getElementById("scrollProgressBar");
+        if (bar) bar.style.width = `${pct}%`;
+      });
+    }
+
+    let roleIdx = 0;
+    let charIdx = 0;
+    let isDeleting = false;
+
+    function runTypewriter() {
+      const roles = state.profile.roles || ["MERN Stack Developer"];
+      const currentRole = roles[roleIdx % roles.length];
+      const el = document.getElementById("typewriterText");
+      if (!el) return;
+
+      charIdx = isDeleting ? charIdx - 1 : charIdx + 1;
+      el.textContent = currentRole.substring(0, charIdx);
+
+      let speed = isDeleting ? 40 : 80;
+      if (!isDeleting && charIdx === currentRole.length) {
+        speed = 2200;
+        isDeleting = true;
+      } else if (isDeleting && charIdx === 0) {
+        isDeleting = false;
+        roleIdx++;
+        speed = 400;
+      }
+      setTimeout(runTypewriter, speed);
+    }
+
+    function toggleTheme() {
+      const html = document.documentElement;
+      html.classList.toggle("dark");
+      localStorage.setItem("nxt_theme", html.classList.contains("dark") ? "dark" : "light");
+    }
+
+    function toggleMobileMenu() {
+      document.getElementById("mobileMenu").classList.toggle("hidden");
+    }
+
+    // --- 6. ADMIN CMS LOGIC ---
+    function openAdminModal(defaultTab = "profile") {
+      document.getElementById("adminModal").classList.remove("hidden");
+      if (isAdminUnlocked) {
+        document.getElementById("adminPinScreen").classList.add("hidden");
+        document.getElementById("adminDashboardPanel").classList.remove("hidden");
+        switchAdminTab(defaultTab);
+      } else {
+        document.getElementById("adminPinScreen").classList.remove("hidden");
+        document.getElementById("adminDashboardPanel").classList.add("hidden");
+        document.getElementById("adminPinInput").value = "";
+        setTimeout(() => document.getElementById("adminPinInput").focus(), 100);
+      }
+      populateAdminForms();
+    }
+
+    function closeAdminModal() {
+      document.getElementById("adminModal").classList.add("hidden");
+      if (window.location.hash.toLowerCase().includes("admin")) {
+        history.replaceState(null, document.title, window.location.pathname + window.location.search);
+      }
+    }
+
+    function verifyAdminPin(e) {
+      e.preventDefault();
+      const entered = document.getElementById("adminPinInput").value.trim();
+      if (entered === state.adminPin) {
+        isAdminUnlocked = true;
+        document.getElementById("pinErrorMsg").classList.add("hidden");
+        document.getElementById("adminPinScreen").classList.add("hidden");
+        document.getElementById("adminDashboardPanel").classList.remove("hidden");
+        populateAdminForms();
+      } else {
+        document.getElementById("pinErrorMsg").classList.remove("hidden");
+      }
+    }
+
+    function switchAdminTab(tabName) {
+      document.querySelectorAll(".adm-tab-panel").forEach(p => p.classList.add("hidden"));
+      document.getElementById(`admTab-${tabName}`).classList.remove("hidden");
+      document.querySelectorAll(".adm-tab-btn").forEach(btn => btn.classList.remove("bg-brandIndigo", "text-white"));
+      const activeBtn = document.getElementById(`admTabBtn-${tabName}`);
+      if (activeBtn) activeBtn.classList.add("bg-brandIndigo", "text-white");
+    }
+
+    function populateAdminForms() {
+      const p = state.profile;
+      const s = p.socials || {};
+      document.getElementById("editName").value = p.name;
+      document.getElementById("editBadge").value = p.badge;
+      document.getElementById("editAvatarUrl").value = p.avatarUrl;
+      document.getElementById("editEmail").value = p.email;
+      document.getElementById("editPhone").value = p.phone;
+      document.getElementById("editLocation").value = p.location;
+      document.getElementById("editCvUrl").value = p.cvUrl;
+      document.getElementById("editBio").value = p.bio;
+
+      document.getElementById("editGithub").value = s.github || "";
+      document.getElementById("editLinkedin").value = s.linkedin || "";
+      document.getElementById("editFacebook").value = s.facebook || "";
+      document.getElementById("editTwitter").value = s.twitter || "";
+      document.getElementById("editInstagram").value = s.instagram || "";
+
+      document.getElementById("statExp").value = p.stats.exp;
+      document.getElementById("statProj").value = p.stats.projects;
+      document.getElementById("statStudents").value = p.stats.students;
+      document.getElementById("statCerts").value = p.stats.certs;
+      document.getElementById("gasWebAppUrl").value = state.gasUrl || "";
+      renderAdminLists();
+    }
+
+    function saveProfileSettings(e) {
+      e.preventDefault();
+      state.profile.name = document.getElementById("editName").value.trim();
+      state.profile.badge = document.getElementById("editBadge").value.trim();
+      state.profile.avatarUrl = document.getElementById("editAvatarUrl").value.trim();
+      state.profile.email = document.getElementById("editEmail").value.trim();
+      state.profile.phone = document.getElementById("editPhone").value.trim();
+      state.profile.location = document.getElementById("editLocation").value.trim();
+      state.profile.cvUrl = document.getElementById("editCvUrl").value.trim();
+      state.profile.bio = document.getElementById("editBio").value.trim();
+      state.profile.socials = {
+        github: document.getElementById("editGithub").value.trim(),
+        linkedin: document.getElementById("editLinkedin").value.trim(),
+        facebook: document.getElementById("editFacebook").value.trim(),
+        twitter: document.getElementById("editTwitter").value.trim(),
+        instagram: document.getElementById("editInstagram").value.trim()
+      };
+      state.profile.stats = {
+        exp: document.getElementById("statExp").value.trim(),
+        projects: document.getElementById("statProj").value.trim(),
+        students: document.getElementById("statStudents").value.trim(),
+        certs: document.getElementById("statCerts").value.trim()
+      };
+      saveState();
+      alert("Profile & Social Links updated!");
+    }
+
+    function handleLocalPhotoUpload(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        document.getElementById("editAvatarUrl").value = evt.target.result;
+        state.profile.avatarUrl = evt.target.result;
+        saveState();
+      };
+      reader.readAsDataURL(file);
+    }
+
+    // Projects CRUD
+    function saveProject(e) {
+      e.preventDefault();
+      const id = document.getElementById("projId").value || "p_" + Date.now();
+      const newProj = {
+        id,
+        title: document.getElementById("projTitle").value.trim(),
+        category: document.getElementById("projCategory").value,
+        image: document.getElementById("projImage").value.trim() || "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80",
+        desc: document.getElementById("projDesc").value.trim(),
+        tech: document.getElementById("projTech").value.split(",").map(s => s.trim()).filter(Boolean),
+        live: document.getElementById("projLive").value.trim() || "#",
+        github: document.getElementById("projGithub").value.trim() || "#"
+      };
+      const idx = state.projects.findIndex(p => p.id === id);
+      if (idx >= 0) state.projects[idx] = newProj;
+      else state.projects.unshift(newProj);
+      resetProjectForm();
+      saveState();
+    }
+
+    function editProject(id) {
+      const p = state.projects.find(item => item.id === id);
+      if (!p) return;
+      document.getElementById("projId").value = p.id;
+      document.getElementById("projTitle").value = p.title;
+      document.getElementById("projCategory").value = p.category;
+      document.getElementById("projImage").value = p.image;
+      document.getElementById("projDesc").value = p.desc;
+      document.getElementById("projTech").value = (p.tech || []).join(", ");
+      document.getElementById("projLive").value = p.live;
+      document.getElementById("projGithub").value = p.github;
+      document.getElementById("projFormTitle").textContent = "Edit Project: " + p.title;
+    }
+
+    function deleteProject(id) {
+      state.projects = state.projects.filter(p => p.id !== id);
+      saveState();
+    }
+
+    function resetProjectForm() {
+      document.getElementById("projectForm").reset();
+      document.getElementById("projId").value = "";
+      document.getElementById("projFormTitle").textContent = "Add New Project";
+    }
+
+    // Journey CRUD
+    function saveJourneyItem(e) {
+      e.preventDefault();
+      const id = document.getElementById("journeyId").value || "j_" + Date.now();
+      const item = {
+        id,
+        type: document.getElementById("journeyType").value,
+        title: document.getElementById("journeyTitle").value.trim(),
+        org: document.getElementById("journeyOrg").value.trim(),
+        period: document.getElementById("journeyPeriod").value.trim(),
+        desc: document.getElementById("journeyDesc").value.trim()
+      };
+      const idx = state.journey.findIndex(j => j.id === id);
+      if (idx >= 0) state.journey[idx] = item;
+      else state.journey.unshift(item);
+      resetJourneyForm();
+      saveState();
+    }
+
+    function editJourneyItem(id) {
+      const item = state.journey.find(j => j.id === id);
+      if (!item) return;
+      document.getElementById("journeyId").value = item.id;
+      document.getElementById("journeyType").value = item.type;
+      document.getElementById("journeyTitle").value = item.title;
+      document.getElementById("journeyOrg").value = item.org;
+      document.getElementById("journeyPeriod").value = item.period;
+      document.getElementById("journeyDesc").value = item.desc;
+    }
+
+    function deleteJourneyItem(id) {
+      state.journey = state.journey.filter(j => j.id !== id);
+      saveState();
+    }
+
+    function resetJourneyForm() {
+      document.getElementById("journeyForm").reset();
+      document.getElementById("journeyId").value = "";
+    }
+
+    // Skills CRUD
+    function addSkillItem(e) {
+      e.preventDefault();
+      const catIdx = parseInt(document.getElementById("newSkillCat").value, 10);
+      const skillName = document.getElementById("newSkillName").value.trim();
+      if (skillName && state.skills[catIdx]) {
+        state.skills[catIdx].items.push(skillName);
+        document.getElementById("newSkillName").value = "";
+        saveState();
+      }
+    }
+
+    function removeSkillItem(catIdx, skillIdx) {
+      state.skills[catIdx].items.splice(skillIdx, 1);
+      saveState();
+    }
+
+    function renderAdminLists() {
+      const projListEl = document.getElementById("admProjectsList");
+      if (projListEl) {
+        projListEl.innerHTML = state.projects.map(p => `
+          <div class="p-3.5 rounded-xl bg-slate-100 dark:bg-slate-800/70 flex items-center justify-between gap-4">
+            <div>
+              <p class="font-bold text-sm">${p.title} <span class="text-xs font-mono text-brandCyan">(${p.category})</span></p>
+              <p class="text-xs text-slate-400 truncate max-w-md">${p.desc}</p>
+            </div>
+            <div class="flex items-center gap-2 shrink-0">
+              <button onclick="editProject('${p.id}')" class="px-3 py-1.5 rounded-lg bg-brandIndigo/20 text-brandCyan text-xs font-semibold">Edit</button>
+              <button onclick="deleteProject('${p.id}')" class="px-3 py-1.5 rounded-lg bg-rose-500/20 text-rose-400 text-xs font-semibold">Delete</button>
+            </div>
+          </div>
+        `).join("");
+      }
+
+      const journeyListEl = document.getElementById("admJourneyList");
+      if (journeyListEl) {
+        journeyListEl.innerHTML = state.journey.map(j => `
+          <div class="p-3.5 rounded-xl bg-slate-100 dark:bg-slate-800/70 flex items-center justify-between gap-4">
+            <div>
+              <span class="text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-brandIndigo/20 text-brandCyan">${j.type}</span>
+              <p class="font-bold text-sm mt-1">${j.title} — <span class="text-xs font-normal text-slate-400">${j.org} (${j.period})</span></p>
+            </div>
+            <div class="flex items-center gap-2 shrink-0">
+              <button onclick="editJourneyItem('${j.id}')" class="px-3 py-1.5 rounded-lg bg-brandIndigo/20 text-brandCyan text-xs font-semibold">Edit</button>
+              <button onclick="deleteJourneyItem('${j.id}')" class="px-3 py-1.5 rounded-lg bg-rose-500/20 text-rose-400 text-xs font-semibold">Delete</button>
+            </div>
+          </div>
+        `).join("");
+      }
+
+      const skillsMgrEl = document.getElementById("admSkillsManager");
+      if (skillsMgrEl) {
+        skillsMgrEl.innerHTML = state.skills.map((cat, cIdx) => `
+          <div class="p-4 rounded-2xl bg-slate-100 dark:bg-slate-800/60">
+            <h5 class="font-bold text-sm mb-3">${cat.category}</h5>
+            <div class="flex flex-wrap gap-2">
+              ${cat.items.map((s, sIdx) => `
+                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white dark:bg-slate-900 text-xs font-mono border border-slate-300 dark:border-slate-700">
+                  ${s}
+                  <button onclick="removeSkillItem(${cIdx}, ${sIdx})" class="text-rose-400 hover:text-rose-600 font-bold">&times;</button>
+                </span>
+              `).join("")}
+            </div>
+          </div>
+        `).join("");
+      }
+
+      const msgListEl = document.getElementById("admMessagesList");
+      const badgeEl = document.getElementById("admMsgCountBadge");
+      if (badgeEl) badgeEl.textContent = state.messages.length;
+      if (msgListEl) {
+        msgListEl.innerHTML = state.messages.length === 0
+          ? `<p class="text-xs font-mono text-slate-400">No messages in inbox.</p>`
+          : state.messages.map(m => `
+            <div class="p-4 rounded-2xl bg-slate-100 dark:bg-slate-800/70 space-y-1 border border-slate-200 dark:border-slate-700">
+              <div class="flex items-center justify-between">
+                <p class="font-bold text-sm text-brandCyan">${m.subject}</p>
+                <button onclick="deleteMessage('${m.id}')" class="text-xs text-rose-400 hover:underline">Delete</button>
+              </div>
+              <p class="text-xs font-mono text-slate-400">From: ${m.name} (${m.email}) • ${m.date}</p>
+              <p class="text-sm pt-2">${m.body}</p>
+            </div>
+          `).join("");
+      }
+    }
+
+    // --- 7. CONTACT FORM & GOOGLE SHEETS SYNC ---
+    async function handleContactSubmit(e) {
+      e.preventDefault();
+      const btn = document.getElementById("contactSubmitBtn");
+      const feedback = document.getElementById("contactFeedback");
+
+      const newMsg = {
+        id: "m_" + Date.now(),
+        name: document.getElementById("msgName").value.trim(),
+        email: document.getElementById("msgEmail").value.trim(),
+        subject: document.getElementById("msgSubject").value.trim(),
+        body: document.getElementById("msgBody").value.trim(),
+        date: new Date().toLocaleString()
+      };
+
+      btn.disabled = true;
+      btn.innerHTML = `<span>Sending Message...</span>`;
+
+      state.messages.unshift(newMsg);
+      saveState();
+
+      if (state.gasUrl) {
+        try {
+          await fetch(state.gasUrl, {
+            method: "POST",
+            mode: "no-cors",
+            headers: { "Content-Type": "text/plain" },
+            body: JSON.stringify({ action: "sendMessage", data: newMsg })
+          });
+        } catch (err) {
+          console.warn("Google Sheet sync warning:", err);
+        }
+      }
+
+      document.getElementById("contactForm").reset();
+      btn.disabled = false;
+      btn.innerHTML = `<i data-lucide="check" class="w-4 h-4"></i><span>Message Delivered!</span>`;
+      feedback.textContent = "Thank you! Your message has been received by Nafis Ahmed.";
+      feedback.className = "text-xs font-mono text-center text-emerald-400 block pt-2";
+      lucide.createIcons();
+    }
+
+    function deleteMessage(id) {
+      state.messages = state.messages.filter(m => m.id !== id);
+      saveState();
+    }
+
+    function clearAllMessages() {
+      state.messages = [];
+      saveState();
+    }
+
+    function saveGasUrl() {
+      state.gasUrl = document.getElementById("gasWebAppUrl").value.trim();
+      saveState();
+      document.getElementById("cloudSyncStatusMsg").textContent = "Google Apps Script URL Saved!";
+    }
+
+    async function syncToGoogleSheets() {
+      if (!state.gasUrl) {
+        switchAdminTab("cloud");
+        document.getElementById("cloudSyncStatusMsg").textContent = "Please paste your Google Apps Script Web App URL first!";
+        return;
+      }
+      const statusEl = document.getElementById("cloudSyncStatusMsg");
+      statusEl.textContent = "Syncing data to Google Sheets...";
+      try {
+        await fetch(state.gasUrl, {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "text/plain" },
+          body: JSON.stringify({ action: "syncAll", payload: state })
+        });
+        statusEl.textContent = "All portfolio data pushed to Google Sheets!";
+      } catch (err) {
+        statusEl.textContent = "Sync error: " + err.message;
+      }
+    }
+
+    async function pullFromGoogleSheets() {
+      if (!state.gasUrl) {
+        document.getElementById("cloudSyncStatusMsg").textContent = "Please paste your Google Apps Script Web App URL first!";
+        return;
+      }
+      const statusEl = document.getElementById("cloudSyncStatusMsg");
+      statusEl.textContent = "Fetching data from Google Sheets...";
+      try {
+        const res = await fetch(state.gasUrl + "?action=getAll");
+        const remoteData = await res.json();
+        if (remoteData && remoteData.profile) {
+          state = { ...state, ...remoteData };
+          saveState();
+          populateAdminForms();
+          statusEl.textContent = "Portfolio updated from Google Sheets!";
+        } else {
+          statusEl.textContent = "Sheet is empty. Push Local Data first.";
+        }
+      } catch (err) {
+        statusEl.textContent = "Fetch failed. Verify Web App permissions (Anyone).";
+      }
+    }
+
+    function updateAdminPin() {
+      const val = document.getElementById("newAdminPin").value.trim();
+      if (val.length >= 4) {
+        state.adminPin = val;
+        saveState();
+        document.getElementById("newAdminPin").value = "";
+        alert("Security PIN updated!");
+      } else {
+        alert("PIN must be at least 4 characters.");
+      }
+    }
+
+    function exportPortfolioJson() {
+      const blob = new Blob([JSON.stringify(state, null, 2)], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "nxt_by_nafis_backup.json";
+      a.click();
+    }
+
+    function resetToDefaultData() {
+      if (confirm("Reset portfolio back to Nafis Ahmed's verified default data?")) {
+        localStorage.removeItem(STORAGE_KEY);
+        state = loadState();
+        renderAll();
+        populateAdminForms();
+      }
+    }
+
+    // --- 8. BOOTSTRAP APPLICATION ---
+    window.addEventListener("DOMContentLoaded", () => {
+      const savedTheme = localStorage.getItem("nxt_theme");
+      if (savedTheme === "light") {
+        document.documentElement.classList.remove("dark");
+      }
+      renderAll();
+      runTypewriter();
+      initScrollRevealAndProgress();
+      checkSecretAdminRoute();
+    });
+  </script>
+</body>
+</html>
